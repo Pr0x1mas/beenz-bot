@@ -1,4 +1,4 @@
-#       ===beenz-bot v0.4===
+#       ===beenz-bot v1.0===
 # ===Copyright 2020 Joshua Britain===
 
 import discord
