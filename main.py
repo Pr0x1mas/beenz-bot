@@ -1,6 +1,8 @@
 #       ===beenz-bot v1.0===
 # ===Copyright 2020 Joshua Britain===
 
+print("Loading beenzbot")
+
 import discord
 import csv
 import random
