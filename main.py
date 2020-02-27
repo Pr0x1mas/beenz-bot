@@ -1,8 +1,10 @@
 import discord
 import csv
 import random
+import os
 
-rawJokes = csv.reader(open('assets/jokes.csv', 'r'))
+rawJokes = csv.reader(open("assets/jokes.csv", "r"))
+
 jokes = sum([i for i in rawJokes],[])
 
 TOKEN = 'NjgyMzI5OTA1ODk5NjM0NzMz.XlbbfQ.b5nto8lGAwhXeNxWjLCxoxcgiaM'
@@ -14,7 +16,7 @@ client = discord.Client()
 
 async def on_message(message):
      if message.author == client.user:
-        return
+          return
 
      if message.content.lower() == "$joke":
           await message.channel.send(random.choice(jokes))
@@ -25,6 +27,14 @@ async def on_message(message):
                await message.channel.send(file=discord.File('assets/flag.png'))
                await message.channel.send("Join us: https://discord.gg/arvVft4")
 
+     if message.content.lower() == "$colony":
+          await message.guild.edit(name="Colony of Heinz")
+
+          with open(os.path.join(os.path.dirname(__file__), "assets/flag.png"), 'rb') as f:
+               
+               await message.guild.edit(icon=f.read())
+               
+     
 @client.event
 async def on_ready():
      print('Logged in as')
