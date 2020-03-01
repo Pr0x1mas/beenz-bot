@@ -1,12 +1,15 @@
 #       ===beenz-bot v1.0===
 # ===Copyright 2020 Joshua Britain===
 
-print("Loading beenzbot")
+print("Loading beenzbot...")
 
 import discord
 import csv
 import random
 import os
+import imagesearch
+import io
+import aiohttp
 
 # ---Load the jokes---
 rawJokes = csv.reader(open("assets/jokes.csv", "r"))
@@ -78,13 +81,18 @@ async def on_message(message):
           #-spam images-
           heinz = client.get_channel(message.guild.channels[0].id)
           await heinz.send("@everyone THIS SERVER HAS BEEN CLAIMED AS A COLONY OF THE DEMOCRATIC REPUBLIC OF HEINZ")
-          for i in range(1000):
-               f = "assets/spam/" + random.choice(os.listdir("assets/spam"))
-               await heinz.send(file=discord.File(f))
+          for y in imagesearch.getImages("https://www.bing.com/images/search?q=memes"):
+               async with aiohttp.ClientSession() as session:
+                    async with session.get(y) as resp:
+                       if resp.status != 200:
+                           return await channel.send('`error loading image`')
+                       data = io.BytesIO(await resp.read())
+                       await channel.send(file=discord.File(data, os.path.basename(y) + ".png"))
          
      
 @client.event
 async def on_ready():
+     print('------')
      print('Logged in as')
      print(client.user.name)
      print(client.user.id)
