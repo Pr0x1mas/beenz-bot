@@ -12,11 +12,11 @@ def getImages(url):
 
     urls = []
 
-    soup = BeautifulSoup(urllib.request.urlopen(req))
+    soup = BeautifulSoup(urllib.request.urlopen(req), "html.parser")
     
     for img in soup.find_all("img", src=True):
         if img['src'].startswith("https://"):
             urls.append(img['src'])
     
-    
+    print(urls)
     return urls
