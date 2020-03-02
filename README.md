@@ -8,11 +8,14 @@ Just somehow obtain admin for the server you want to kill and add the bot via [t
 
 ## Commands
 
-* ### $propoganda
+### $meme
+Sends a dank meme
+
+### $propoganda
 Spams the server with DRH propaganda
 
-* ### $colony
+### $colony
 Changes the server name to 'Colony of Heinz' and sets icon to our flag
 
-* ### $rape
+### $rape
 Removes all permissions for everyone and deletes all channels. Then it spams a new channel with hentai.
