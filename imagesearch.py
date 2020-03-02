@@ -1,3 +1,6 @@
+# ===Python Web Image Loader v1.0===
+# ===Copyright 2020 Joshua Britain===
+
 from bs4 import BeautifulSoup
 import urllib.request
 

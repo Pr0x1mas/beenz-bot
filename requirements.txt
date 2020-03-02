@@ -3,3 +3,4 @@ aiohttp
 dnspython
 PyNaCl
 async-timeout
+beautifulsoup
