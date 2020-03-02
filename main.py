@@ -4,7 +4,6 @@
 print("Loading beenzbot...")
 
 import discord
-import csv
 import random
 import os
 import imagesearch
@@ -26,10 +25,6 @@ client = discord.Client()
 async def on_message(message):
      if message.author == client.user: #prevent bot replying to itself
           return
-
-     # --Fake joke feature--
-     if message.content.lower() == "$joke":
-          await message.channel.send(random.choice(jokes)) #send random joke
 
      #--Fake meme feature--
      if message.content.lower() == "$meme":
