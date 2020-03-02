@@ -18,5 +18,4 @@ def getImages(url):
         if img['src'].startswith("https://"):
             urls.append(img['src'])
     
-    print(urls)
     return urls
