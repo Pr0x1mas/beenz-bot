@@ -10,10 +10,6 @@ import imagesearch
 import io
 import aiohttp
 
-# ---Load the jokes---
-rawJokes = csv.reader(open("assets/jokes.csv", "r"))
-jokes = sum([i for i in rawJokes],[])
-
 # ---Setup connection to bot---
 TOKEN = 'NjgyMzI5OTA1ODk5NjM0NzMz.XlbbfQ.b5nto8lGAwhXeNxWjLCxoxcgiaM'
 client = discord.Client()
