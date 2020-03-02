@@ -1,9 +1,4 @@
 discord
-csv
-random
-os
-imagesearch
-io
 aiohttp
 dnspython
 PyNaCl
