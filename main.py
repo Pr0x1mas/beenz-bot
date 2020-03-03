@@ -15,7 +15,7 @@ load_dotenv()
 
 
 # ---Setup connection to bot---
-TOKEN = "NjgyMzI5OTA1ODk5NjM0NzMz.XlbbfQ.b5nto8lGAwhXeNxWjLCxoxcgiaM"
+TOKEN = "Njg0NDgxODk2ODIyMjEwNTYw.Xl6vhw.MuaT661dhcMP7fXRxH6anIOccFc"
 client = discord.Client()
 
 
