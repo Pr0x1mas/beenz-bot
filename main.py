@@ -28,17 +28,33 @@ async def on_message(message):
 
      #--Fake meme feature--
      if message.content.lower() == "$meme":
-          memes = imagesearch.getImages("https://reddit.com/r/dankmemes") #load dankmemes hot page
-          meme = random.choice(memes) #select random image from page
-          while not meme.startswith("https://i.redd.it/"): #check it is an uploaded file and not an asset
-               meme = random.choice(memes)
+          memes = imagesearch.getImages("https://www.reddit.com/r/dankmemes/") #load dankmemes hot page
+
+          anymemes = False
+
+          for meme in memes:
+               if meme.startswith("https://preview.redd.it"):
+                    anymemes = True
+                    break
+               
+
+          if anymemes == True:
+               meme = random.choice(memes) #select random image from page
+               while not meme.startswith("https://preview.redd.it"): #check it is an uploaded file and not an asset
+                    meme = random.choice(memes)
+
+               
           
-          async with aiohttp.ClientSession() as session: #http stuff I don't understand
-                         async with session.get(meme) as resp:
-                            if resp.status != 200:
-                                return await channel.send('`error loading image`')
-                            data = io.BytesIO(await resp.read())
-                            await message.channel.send(file=discord.File(data, os.path.basename(meme))) #send the meme
+               async with aiohttp.ClientSession() as session: #http stuff I don't understand
+                              async with session.get(meme) as resp:
+                                   if resp.status != 200:
+                                        return
+                                   meme = meme + ".jpg"
+                                   data = io.BytesIO(await resp.read())
+                                   await message.channel.send(file=discord.File(data, os.path.basename(meme))) #send the meme
+          else:
+               await message.channel.send("`unable to locate a meme`")
+               print(memes)
 
      # --Spam server with propaganda--
      if message.content.lower() == "$propaganda":
