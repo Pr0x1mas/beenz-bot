@@ -28,9 +28,9 @@ async def on_message(message):
 
      #--Fake meme feature--
      if message.content.lower() == "$meme":
-          memes = imagesearch.getImages("https://reddit.com/r/dankmemes") #load dankmemes hot page
+          memes = imagesearch.getImages("https://twitter.com/ItMeIRL2") #load twitter MeIRL mirror page
           meme = random.choice(memes) #select random image from page
-          while not meme.startswith("https://i.redd.it/"): #check it is an uploaded file and not an asset
+          while not meme.startswith("https://pbs.twimg.com/media/"): #check it is an uploaded file and not an asset
                meme = random.choice(memes)
           
           async with aiohttp.ClientSession() as session: #http stuff I don't understand
