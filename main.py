@@ -9,9 +9,13 @@ import os
 import imagesearch
 import io
 import aiohttp
+from dotenv import load_dotenv
+load_dotenv()
+
+
 
 # ---Setup connection to bot---
-TOKEN = 'NjgyMzI5OTA1ODk5NjM0NzMz.XlbbfQ.b5nto8lGAwhXeNxWjLCxoxcgiaM'
+TOKEN = os.getenv("token")
 client = discord.Client()
 
 

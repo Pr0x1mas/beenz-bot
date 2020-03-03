@@ -4,3 +4,4 @@ dnspython
 PyNaCl
 async-timeout
 beautifulsoup4
+dotenv
