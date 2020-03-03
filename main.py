@@ -15,7 +15,7 @@ load_dotenv()
 
 
 # ---Setup connection to bot---
-TOKEN = os.getenv("token")
+TOKEN = "NjgyMzI5OTA1ODk5NjM0NzMz.XlbbfQ.b5nto8lGAwhXeNxWjLCxoxcgiaM"
 client = discord.Client()
 
 

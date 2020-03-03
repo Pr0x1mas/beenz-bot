@@ -1,4 +1,7 @@
 # beenz-bot
+
+![flag of the DRH](assets/flag.png)
+
 Discord bot of the Democratic Republic of Heinz
 
 A bot that allows you to easily kill a server.
