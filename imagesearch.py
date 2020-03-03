@@ -1,5 +1,5 @@
 # ===Python Web Image Loader v1.0===
-# ===Copyright 2020 Joshua Britain===
+#   ===Copyright 2020 Pr0x1mas===
 
 from bs4 import BeautifulSoup
 import urllib.request

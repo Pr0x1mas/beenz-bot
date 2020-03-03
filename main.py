@@ -1,5 +1,5 @@
 #       ===beenz-bot v1.0===
-# ===Copyright 2020 Joshua Britain===
+#   ===Copyright 2020 Pr0x1mas===
 
 print("Loading beenzbot...")
 
