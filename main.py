@@ -37,13 +37,11 @@ async def on_message(message):
                     anymemes = True
                     break
                
-
           if anymemes == True:
                meme = random.choice(memes) #select random image from page
                while not meme.startswith("https://preview.redd.it"): #check it is an uploaded file and not an asset
                     meme = random.choice(memes)
 
-               
           
                async with aiohttp.ClientSession() as session: #http stuff I don't understand
                               async with session.get(meme) as resp:
