@@ -14,7 +14,15 @@ Just somehow obtain admin for the server you want to kill and add the bot via [t
 ### $meme
 Sends a dank meme
 
-### $propoganda
+### $beans
+
+Sends a cursed image of beans
+
+### $dm
+
+Attempts to DM all users banned from a server in the hope they'll join the raid. It's very unlikely it'll work.
+
+### $propaganda
 Spams the server with DRH propaganda
 
 ### $colony
