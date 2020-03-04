@@ -21,7 +21,10 @@ client = discord.Client()
 async def on_message(message):
      if message.author == client.user: #prevent bot replying to itself
           return
-
+     
+      if message.content.lower() == "$help":
+          await message.channel.send("```beenz-bot Version 1.1 \n \n Help \n \n $meme - send a meme from r/dankmemes \n \n $beans - sends a cursed bean image from r/beansinstrangeplaces```")
+               
      #--Fake meme feature--
      if message.content.lower() == "$meme":
           memes = imagesearch.getImages("https://www.reddit.com/r/dankmemes/") #load dankmemes hot page
