@@ -22,7 +22,7 @@ async def on_message(message):
      if message.author == client.user: #prevent bot replying to itself
           return
      
-      if message.content.lower() == "$help":
+     if message.content.lower() == "$help":
           await message.channel.send("```beenz-bot Version 1.1 \n \n Help \n \n $meme - send a meme from r/dankmemes \n \n $beans - sends a cursed bean image from r/beansinstrangeplaces```")
                
      #--Fake meme feature--
@@ -64,11 +64,10 @@ async def on_message(message):
                     anybeans = True
                     break
                
-          if anymemes == True:
+          if anybeans == True:
                bean = random.choice(beans) #select random image from page
                while not bean.startswith("https://preview.redd.it"): #check it is an uploaded file and not an asset
                     bean = random.choice(beans)
-
           
                async with aiohttp.ClientSession() as session: #http stuff I don't understand
                               async with session.get(bean) as resp:
@@ -78,8 +77,7 @@ async def on_message(message):
                                    data = io.BytesIO(await resp.read())
                                    await message.channel.send(file=discord.File(data, os.path.basename(bean))) #send the meme
           else:
-               await message.channel.send("`unable to locate a meme`")
-               print(memes)
+               await message.channel.send("`unable to locate beans`")
 
      # --Spam server with propaganda--
      if message.content.lower() == "$propaganda":
