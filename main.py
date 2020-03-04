@@ -52,7 +52,7 @@ async def on_message(message):
                
                #--Fake bean feature--
      if message.content.lower() == "$beans":
-          beans = imagesearch.getImages("https://www.reddit.com/r/beansinstrangeplaces/") #load dankmemes hot page
+          beans = imagesearch.getImages("https://www.reddit.com/r/BeansInStrangePlaces/") #load dankmemes hot page
 
           anybeans = False
 
