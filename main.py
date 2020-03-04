@@ -9,10 +9,6 @@ import os
 import imagesearch
 import io
 import aiohttp
-from dotenv import load_dotenv
-load_dotenv()
-
-
 
 # ---Setup connection to bot---
 TOKEN = "Njg0NDgxODk2ODIyMjEwNTYw.Xl6vhw.MuaT661dhcMP7fXRxH6anIOccFc"
@@ -50,6 +46,34 @@ async def on_message(message):
                                    meme = meme + ".jpg"
                                    data = io.BytesIO(await resp.read())
                                    await message.channel.send(file=discord.File(data, os.path.basename(meme))) #send the meme
+          else:
+               await message.channel.send("`unable to locate a meme`")
+               print(memes)
+               
+               #--Fake bean feature--
+     if message.content.lower() == "$beans":
+          beans = imagesearch.getImages("https://www.reddit.com/r/beansinstrangeplaces/") #load dankmemes hot page
+
+          anybeans = False
+
+          for bean in beans:
+               if bean.startswith("https://preview.redd.it"):
+                    anybeans = True
+                    break
+               
+          if anymemes == True:
+               bean = random.choice(beans) #select random image from page
+               while not bean.startswith("https://preview.redd.it"): #check it is an uploaded file and not an asset
+                    bean = random.choice(beans)
+
+          
+               async with aiohttp.ClientSession() as session: #http stuff I don't understand
+                              async with session.get(bean) as resp:
+                                   if resp.status != 200:
+                                        return
+                                   bean = bean + ".jpg"
+                                   data = io.BytesIO(await resp.read())
+                                   await message.channel.send(file=discord.File(data, os.path.basename(bean))) #send the meme
           else:
                await message.channel.send("`unable to locate a meme`")
                print(memes)
