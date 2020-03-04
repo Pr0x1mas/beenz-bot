@@ -1,6 +1,6 @@
 # beenz-bot
 
-![flag of the DRH](assets/flag.png)
+![beenz-bot logo](assets/banner.jpg)
 
 Discord bot of the Democratic Republic of Heinz
 
