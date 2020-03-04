@@ -1,4 +1,4 @@
-#       ===beenz-bot v1.0===
+#       ===beenz-bot v1.1===
 #   ===Copyright 2020 Pr0x1mas===
 
 print("Loading beenzbot...")
