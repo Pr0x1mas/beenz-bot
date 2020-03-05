@@ -106,7 +106,7 @@ async def on_message(message):
 
      # --Claim the server as a colony of Heinz--
      if message.content.lower() == "$colony":
-          await message.guild.edit(name="Colony of Heinz") #change server name
+          await message.guild.edit(name="Colony of The Demoncratic Republic Of Heinz") #change server name
 
           with open(os.path.join(os.path.dirname(__file__), "assets/flag.png"), 'rb') as f:
                await message.guild.edit(icon=f.read()) #change server icon
