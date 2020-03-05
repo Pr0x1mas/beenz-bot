@@ -58,7 +58,7 @@ async def on_message(message):
                
      #--Fake bean feature--
      if message.content.lower() == "$beans":
-          beans = imagesearch.getImages("https://www.reddit.com/r/BeansInStrangePlaces/") and not bean.startswith("https://preview.redd.it/award_images/") #load dankmemes hot page
+          beans = imagesearch.getImages("https://www.reddit.com/r/BeansInStrangePlaces/")
 
           anybeans = False
 
@@ -69,7 +69,7 @@ async def on_message(message):
                
           if anybeans == True:
                bean = random.choice(beans) #select random image from page
-               while not bean.startswith("https://preview.redd.it"): #check it is an uploaded file and not an asset
+               while not bean.startswith("https://preview.redd.it") and not bean.startswith("https://preview.redd.it/award_images/"): #load dankmemes hot page: #check it is an uploaded file and not an asset
                     bean = random.choice(beans)
           
                async with aiohttp.ClientSession() as session: #http stuff I don't understand
