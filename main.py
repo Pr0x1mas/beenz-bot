@@ -35,13 +35,13 @@ async def on_message(message):
           anymemes = False
 
           for meme in memes:
-               if meme.startswith("https://preview.redd.it"):
+               if meme.startswith("https://preview.redd.it") and not meme.startswith("https://preview.redd.it/award_images/"):
                     anymemes = True
                     break
                
           if anymemes == True:
                meme = random.choice(memes) #select random image from page
-               while not meme.startswith("https://preview.redd.it"): #check it is an uploaded file and not an asset
+               while not meme.startswith("https://preview.redd.it") and not meme.startswith("https://preview.redd.it/award_images/"): #check it is an uploaded file and not an asset
                     meme = random.choice(memes)
 
           
@@ -58,12 +58,12 @@ async def on_message(message):
                
      #--Fake bean feature--
      if message.content.lower() == "$beans":
-          beans = imagesearch.getImages("https://www.reddit.com/r/BeansInStrangePlaces/") #load dankmemes hot page
+          beans = imagesearch.getImages("https://www.reddit.com/r/BeansInStrangePlaces/") and not bean.startswith("https://preview.redd.it/award_images/") #load dankmemes hot page
 
           anybeans = False
 
           for bean in beans:
-               if bean.startswith("https://preview.redd.it"):
+               if bean.startswith("https://preview.redd.it") and not bean.startswith("https://preview.redd.it/award_images/"):
                     anybeans = True
                     break
                
