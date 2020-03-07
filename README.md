@@ -29,4 +29,4 @@ Spams the server with DRH propaganda
 Changes the server name to 'Colony of Heinz' and sets icon to our flag
 
 ### $rape
-Removes all permissions for everyone and deletes all channels. Then it spams a new channel with hentai.
+Removes all permissions for everyone and deletes all channels. Then it spams a new channel with hentai, waits 5 seconds, and bans eveyone it can.
