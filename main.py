@@ -1,7 +1,7 @@
 #       ===beenz-bot v1.2===
 #   ===Copyright 2020 Pr0x1mas===
 
-sysversion = "1.3a"
+sysversion = "1.3"
 
 print("Loading beenzbot...")
 
