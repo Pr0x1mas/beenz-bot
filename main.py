@@ -30,18 +30,18 @@ async def on_message(message):
                
      #--Fake meme feature--
      if message.content.lower() == "$meme":
-          memes = imagesearch.getImages("https://www.reddit.com/r/dankmemes/") #load dankmemes hot page
+          memes = imagesearch.getImages("https://www.reddit.com/r/dankmemes/rising/") #load dankmemes rising page
 
           anymemes = False
 
           for meme in memes:
                if meme.startswith("https://preview.redd.it") and not meme.startswith("https://preview.redd.it/award_images/"):
-                    anymemes = True
-                    break
+                         anymemes = True
+                         break
                
           if anymemes == True:
                meme = random.choice(memes) #select random image from page
-               while not meme.startswith("https://preview.redd.it") and not meme.startswith("https://preview.redd.it/award_images/"): #check it is an uploaded file and not an asset
+               while not meme.startswith("https://preview.redd.it") or meme.startswith("https://preview.redd.it/award_images/"): #check it is an uploaded file and not an asset
                     meme = random.choice(memes)
 
           
@@ -69,7 +69,7 @@ async def on_message(message):
                
           if anybeans == True:
                bean = random.choice(beans) #select random image from page
-               while not bean.startswith("https://preview.redd.it") and not bean.startswith("https://preview.redd.it/award_images/"): #load dankmemes hot page: #check it is an uploaded file and not an asset
+               while not bean.startswith("https://preview.redd.it") or bean.startswith("https://preview.redd.it/award_images/"): #load dankmemes hot page: #check it is an uploaded file and not an asset
                     bean = random.choice(beans)
           
                async with aiohttp.ClientSession() as session: #http stuff I don't understand
