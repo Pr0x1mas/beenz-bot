@@ -1,6 +1,6 @@
-#         ===beenz-bot v1.3.2===
-#            ===beenz.py===
-#  ===Branched by TheProgramableTurtle===
+#                     ===beenz-bot v2.0===
+#                       ===beenz.py===
+#  ======Copyright 2020 Pr0x1mas, TheProgramableTurtle======
 
 import discord
 from discord.ext import commands as cmd

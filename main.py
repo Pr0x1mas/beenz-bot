@@ -1,7 +1,6 @@
-#         ===beenz-bot v1.3.2===
-#      ===Copyright 2020 Pr0x1mas===
-#            ===main.py===
-#  ===Branched by TheProgramableTurtle===
+#                     ===beenz-bot v2.0===
+#                        ===main.py===
+#  ======Copyright 2020 Pr0x1mas, TheProgramableTurtle======
 print("Loading beenzbot...")
 
 import beenz
@@ -11,8 +10,6 @@ from discord.ext import commands as cmd
 TOKEN = "Njg1ODE2NTAyMDc4OTMxMTA3.XmOKpQ.Rsve4K8WOFRuuW5KuRBecgrVrh0"
 
 client = beenz.Bot(sysversion)
-
-
 
 client.registerCommands()
 

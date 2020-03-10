@@ -1,4 +1,4 @@
-#         ===beenz-bot v1.3.2===
-#            ===globals.py===
-#  ===Branched by TheProgramableTurtle===
-sysversion = "1.3"
+#                     ===beenz-bot v2.0===
+#                       ===globals.py===
+#  ======Copyright 2020 Pr0x1mas, TheProgramableTurtle======
+sysversion = "2.0"
