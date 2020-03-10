@@ -2,7 +2,7 @@
 
 ![beenz-bot logo](assets/banner.jpg)
 
-The orginal versio of the Discord bot of the Democratic Republic of Heinz
+The orginal version of the Discord bot of the Democratic Republic of Heinz before it was restructured by TheProgramableTurtle.
 
 A bot that allows you to easily kill a server.
 
