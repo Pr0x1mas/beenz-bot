@@ -1,8 +1,8 @@
-# beenz-bot
+# beenz-bot Legacy
 
 ![beenz-bot logo](assets/banner.jpg)
 
-Discord bot of the Democratic Republic of Heinz
+The orginal versio of the Discord bot of the Democratic Republic of Heinz
 
 A bot that allows you to easily kill a server.
 
