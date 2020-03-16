@@ -29,6 +29,7 @@ class Bot(cmd.Bot):
         return ctx.author.id == self.user.id
 
     def registerCommands(self):
+        self.remove_command("help")
         print("__Object Members_______________________________")
         for member in inspect.getmembers(self):
             if "discord.ext.commands.core.Command" in repr(member[1]):
@@ -50,9 +51,9 @@ class Bot(cmd.Bot):
         print("________________________________________")
 
     @cmd.command()
-    async def h(ctx):
+    async def help(ctx):
         # --Help command---
-        await ctx.send("```beenz-bot Version " + sysversion + " \n \n (c) 2020 @Pr0x1mas, TheProgramableTurtle with help from @Alexander Litvinenko \n \n Help \n \n $meme - send a meme from r/dankmemes \n \n $beans - sends a cursed bean image from r/beansinstrangeplaces```")
+        await ctx.send("```beenz-bot Version " + sysversion + " \n \n Instance by Spharax \n \n Help \n \n $meme - send a meme from r/dankmemes \n \n $beans - sends a cursed bean image from r/beansinstrangeplaces```")
 
     @cmd.command()
     async def meme(ctx):
