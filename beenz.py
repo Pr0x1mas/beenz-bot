@@ -29,6 +29,7 @@ class Bot(cmd.Bot):
         return ctx.author.id == self.user.id
 
     def registerCommands(self):
+        self.remove_command("help")
         print("__Object Members_______________________________")
         for member in inspect.getmembers(self):
             if "discord.ext.commands.core.Command" in repr(member[1]):
