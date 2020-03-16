@@ -51,7 +51,7 @@ class Bot(cmd.Bot):
         print("________________________________________")
 
     @cmd.command()
-    async def h(ctx):
+    async def help(ctx):
         # --Help command---
         await ctx.send("```beenz-bot Version " + sysversion + " \n \n (c) 2020 @Pr0x1mas, TheProgramableTurtle with help from @Alexander Litvinenko \n \n Help \n \n $meme - send a meme from r/dankmemes \n \n $beans - sends a cursed bean image from r/beansinstrangeplaces```")
 
