@@ -53,7 +53,7 @@ class Bot(cmd.Bot):
     @cmd.command()
     async def help(ctx):
         # --Help command---
-        await ctx.send("```beenz-bot Version " + sysversion + " \n \n (c) 2020 Spharax \n \n Help \n \n $meme - send a meme from r/dankmemes \n \n $beans - sends a cursed bean image from r/beansinstrangeplaces```")
+        await ctx.send("```beenz-bot Version " + sysversion + " \n \n Instance by Spharax \n \n Help \n \n $meme - send a meme from r/dankmemes \n \n $beans - sends a cursed bean image from r/beansinstrangeplaces```")
 
     @cmd.command()
     async def meme(ctx):
