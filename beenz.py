@@ -29,6 +29,7 @@ class Bot(cmd.Bot):
         return ctx.author.id == self.user.id
 
     def registerCommands(self):
+        """
         self.remove_command("help")
         print("__Object Members_______________________________")
         for member in inspect.getmembers(self):
@@ -44,6 +45,9 @@ class Bot(cmd.Bot):
         print("________________________________________")
         
         print("__Login_________________________________")
+        """
+        self.add_command(self.beans)
+        self.add_command(self.meme)
     async def on_ready(self):
         print('Connected to Discord as')
         print(self.user.name)
@@ -51,7 +55,7 @@ class Bot(cmd.Bot):
         print("________________________________________")
 
     @cmd.command()
-    async def help(ctx):
+    async def h(ctx):
         # --Help command---
         await ctx.send("```beenz-bot Version " + sysversion + " \n \n Instance by Spharax \n \n Help \n \n $meme - send a meme from r/dankmemes \n \n $beans - sends a cursed bean image from r/beansinstrangeplaces```")
 
