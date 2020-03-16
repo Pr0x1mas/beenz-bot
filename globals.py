@@ -2,4 +2,4 @@
 #                       ===globals.py===
 #  ======Copyright 2020 Pr0x1mas, TheProgramableTurtle======
 sysversion = "2.1"
-originalname = None
+#originalname = None
