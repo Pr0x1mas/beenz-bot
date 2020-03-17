@@ -55,11 +55,6 @@ class Bot(cmd.Bot):
         print("________________________________________")
 
     @cmd.command()
-    async def h(ctx):
-        # --Help command---
-        await ctx.send("```beenz-bot Version " + sysversion + " \n \n Instance by Spharax \n \n Help \n \n $meme - send a meme from r/dankmemes \n \n $beans - sends a cursed bean image from r/beansinstrangeplaces```")
-
-    @cmd.command()
     async def meme(ctx):
         # --Fake meme feature--
         memes = imagesearch.getImages("https://www.reddit.com/r/dankmemes/rising/")  # load dankmemes rising page
