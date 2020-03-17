@@ -7,7 +7,7 @@ import beenz
 from globals import *
 from discord.ext import commands as cmd
 # ---Setup connection to bot---
-TOKEN = "Njg1ODE2NTAyMDc4OTMxMTA3.Xm_-wg.k6Bhuty77OgJRS3ChS_dLy1fGAI"
+TOKEN = "Njg1ODE2NTAyMDc4OTMxMTA3.XnE6Aw.kezpNl5-o0mozTvgLd1teIkwd-0"
 
 client = beenz.Bot(sysversion)
 
