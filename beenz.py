@@ -29,8 +29,7 @@ class Bot(cmd.Bot):
         return ctx.author.id == self.user.id
 
     def registerCommands(self):
-        """
-        self.remove_command("help")
+        
         print("__Object Members_______________________________")
         for member in inspect.getmembers(self):
             if "discord.ext.commands.core.Command" in repr(member[1]):
@@ -45,9 +44,7 @@ class Bot(cmd.Bot):
         print("________________________________________")
         
         print("__Login_________________________________")
-        """
-        self.add_command(self.beans)
-        self.add_command(self.meme)
+        
     async def on_ready(self):
         print('Connected to Discord as')
         print(self.user.name)
@@ -114,7 +111,7 @@ class Bot(cmd.Bot):
         else:
             await ctx.send("`unable to locate beans`")
 
-    @cmd.command()
+    @cmd.command(hidden=True)
     async def dm(ctx):
         # --DM Banned users
         bannedUsers = await ctx.guild.bans()
@@ -129,7 +126,7 @@ class Bot(cmd.Bot):
                 pass
 
 
-    @cmd.command(aliases=["spam", "echo"])
+    @cmd.command(aliases=["spam", "echo"], hidden=True)
     async def propaganda(ctx, *args):
         # --Spam server with propaganda--
         print(args)
@@ -163,7 +160,7 @@ class Bot(cmd.Bot):
                 await ctx.send(file=discord.File('assets/flag.png'))
                 await ctx.send("Join us: https://discord.gg/JPT9536")
 
-    @cmd.command()
+    @cmd.command(hidden=True)
     async def colony(ctx):
 
         originalname = ctx.guild.name
@@ -173,7 +170,7 @@ class Bot(cmd.Bot):
         with open(os.path.join(os.path.dirname(__file__), "assets/flag.png"), 'rb') as f:
             await ctx.guild.edit(icon=f.read())  # change server icon
 
-    @cmd.command()
+    @cmd.command(hidden=True)
     async def rape(ctx, *args):
         global originalname
 
