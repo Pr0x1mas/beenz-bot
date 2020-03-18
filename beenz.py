@@ -95,7 +95,7 @@ class Bot(cmd.Bot):
         if anybeans:
             bean = random.choice(beans)  # select random image from page
             while not bean.startswith("https://preview.redd.it") or bean.startswith(
-                    "https://preview.redd.it/award_images/"):  # load dankmemes hot page: #check it is an uploaded file and not an asset
+                    "https://preview.redd.it/award_images/"):  # load beansinstrangeplaces hot page: #check it is an uploaded file and not an asset
                 bean = random.choice(beans)
 
             async with aiohttp.ClientSession() as session:  # http stuff I don't understand
@@ -105,6 +105,34 @@ class Bot(cmd.Bot):
                     bean = bean + ".jpg"
                     data = io.BytesIO(await resp.read())
                     await ctx.send(file=discord.File(data, os.path.basename(bean)))  # send the meme
+        else:
+            await ctx.send("`unable to locate geese`")
+
+    @cmd.command()
+    async def geese(ctx):
+        # --Fake geese feature--
+        geese = imagesearch.getImages("https://www.reddit.com/r/Geese/")
+
+        anygeese = False
+
+        for goose in geese:
+            if goose.startswith("https://preview.redd.it") and not goose.startswith(
+                    "https://preview.redd.it/award_images/"):
+                anygeese = True
+                break
+
+        if anygeese:
+            goose = random.choice(geese)  # select random image from page
+            while not goose.startswith("https://preview.redd.it") or goose.startswith("https://preview.redd.it/award_images/"):  # load geese hot page: #check it is an uploaded file and not an asset
+                goose = random.choice(geese)
+
+            async with aiohttp.ClientSession() as session:  # http stuff I don't understand
+                async with session.get(goose) as resp:
+                    if resp.status != 200:
+                        return
+                    goose = goose + ".jpg"
+                    data = io.BytesIO(await resp.read())
+                    await ctx.send(file=discord.File(data, os.path.basename(goose)))  # send the goose
         else:
             await ctx.send("`unable to locate beans`")
 
