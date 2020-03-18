@@ -29,7 +29,6 @@ class Bot(cmd.Bot):
         return ctx.author.id == self.user.id
 
     def registerCommands(self):
-        
         print("__Object Members_______________________________")
         for member in inspect.getmembers(self):
             if "discord.ext.commands.core.Command" in repr(member[1]):
@@ -44,7 +43,6 @@ class Bot(cmd.Bot):
         print("________________________________________")
         
         print("__Login_________________________________")
-        
     async def on_ready(self):
         print('Connected to Discord as')
         print(self.user.name)
@@ -116,14 +114,17 @@ class Bot(cmd.Bot):
         # --DM Banned users
         bannedUsers = await ctx.guild.bans()
         unban = await ctx.channel.create_invite(reason="Those who were disgraced by this server are being given an opportunity to redeem themselves by the DRH")
+        print(bannedUsers)
         for ban in bannedUsers:
-            try:
-                user = ban.user
-                await user.send("Hi. If you're seeing this message, you were at some point banned from " + ctx.guild.name + ". Luckily for you, the Democratic Republic of Heinz has chosen to raid this server, your ban has been revoked, and you have been invited to join us on this raid.")
-                await user.send(unban.url)
-                await ctx.guild.unban(user, reason="Those who were disgraced by this server are being given an opportunity to redeem themselves by the DRH")
-            except Exception:
-                pass
+            user = ban.user
+            await ctx.guild.unban(user, reason="Those who were disgraced by this server are being given an opportunity to redeem themselves by the DRH")
+            print(user)
+            print(ban)
+            print(user)
+            await user.send("Hi. If you're seeing this message, you were at some point banned from " + ctx.guild.name + ". Luckily for you, the Democratic Republic of Heinz has chosen to raid this server, your ban has been revoked, and you have been invited to join us on this raid.")
+            await user.send(unban.url)
+
+
 
 
     @cmd.command(aliases=["spam", "echo"], hidden=True)
@@ -139,7 +140,7 @@ class Bot(cmd.Bot):
                     for i in range(int(args[0])):
                         await ctx.send(
                             "@everyone THIS SERVER HAS BEEN CLAIMED AS A COLONY OF THE DEMOCRATIC REPUBLIC OF HEINZ")
-                        await ctx.send(file=discord.File('assets/flag.png'))
+                        await ctx.send(file=discord.File('assets/flag.jpg'))
                         await ctx.send("Join us: https://discord.gg/JPT9536")
             except ValueError:
                 await ctx.send("Please enter an integer for the number of messages")
@@ -157,7 +158,7 @@ class Bot(cmd.Bot):
             for i in range(2):
                 await ctx.send(
                     "@everyone THIS SERVER HAS BEEN CLAIMED AS A COLONY OF THE DEMOCRATIC REPUBLIC OF HEINZ")
-                await ctx.send(file=discord.File('assets/flag.png'))
+                await ctx.send(file=discord.File('assets/flag.jpg'))
                 await ctx.send("Join us: https://discord.gg/JPT9536")
 
     @cmd.command(hidden=True)
@@ -167,7 +168,7 @@ class Bot(cmd.Bot):
         # --Claim the server as a colony of Heinz--
         await ctx.guild.edit(name="Colony of The Democratic Republic Of Heinz")  # change server name
 
-        with open(os.path.join(os.path.dirname(__file__), "assets/flag.png"), 'rb') as f:
+        with open(os.path.join(os.path.dirname(__file__), "assets/flag.jpg"), 'rb') as f:
             await ctx.guild.edit(icon=f.read())  # change server icon
 
     @cmd.command(hidden=True)
