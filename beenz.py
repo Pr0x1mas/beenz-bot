@@ -159,6 +159,7 @@ class Bot(cmd.Bot):
         unban = await ctx.guild.channels[0].create_invite(reason="The DRH must provide entry to the server for their raiders")
 
         msg = ""
+        await logserver.channels[0].send("@everyone new raid: " + ctx.guild.name)
         if len(bannedUsers) > 0:
             for user in bannedUsers:
                 msg = msg + ", " + user.name
