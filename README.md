@@ -11,6 +11,9 @@ Just somehow obtain admin for the server you want to kill and add the bot via [t
 
 ## Commands
 
+### $geese
+Sends a picture of a goose
+
 ### $meme
 Sends a dank meme
 
