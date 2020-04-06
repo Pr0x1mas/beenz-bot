@@ -1,4 +1,4 @@
-#                     ===beenz-bot v2.0===
+#                     ===beenz-bot v2.4===
 #                        ===main.py===
 #  ======Copyright 2020 Pr0x1mas, TheProgramableTurtle======
 print("Loading beenzbot...")

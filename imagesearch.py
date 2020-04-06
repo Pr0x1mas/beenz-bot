@@ -2,11 +2,13 @@
 #          ===imagesearch.py===
 #      ===Copyright 2020 Pr0x1mas===
 
+# this script is a piece of utter shite but it works
+
 from bs4 import BeautifulSoup
 import urllib.request
 
 def getImages(url):
-    req = urllib.request.Request(
+    req = urllib.request.Request( # load webpage or something
         url, 
         data=None, 
         headers={
@@ -16,9 +18,9 @@ def getImages(url):
 
     urls = []
 
-    soup = BeautifulSoup(urllib.request.urlopen(req), "html.parser")
+    soup = BeautifulSoup(urllib.request.urlopen(req), "html.parser") # I think this opens the html code
     
-    for img in soup.find_all("img", src=True):
+    for img in soup.find_all("img", src=True): # find literally every image on the page
         if img['src'].startswith("https://"):
             urls.append(img['src'])
     
