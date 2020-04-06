@@ -1,7 +1,8 @@
-#                     ===beenz-bot v2.0===
+#                     ===beenz-bot v2.4===
 #                       ===beenz.py===
 #  ======Copyright 2020 Pr0x1mas, TheProgramableTurtle======
 
+# --Imports--
 import discord
 from discord.ext import commands as cmd
 import random
@@ -14,15 +15,11 @@ import inspect
 import youtube_dl
 import asyncio
 
-if not discord.opus.is_loaded():
-    # the 'opus' library here is opus.dll on windows
-    # or libopus.so on linux in the current directory
-    # you should replace this with the location the
-    # opus library is located in and with the proper filename.
-    # note that on windows this DLL is automatically provided for you
+# --Setup to play audio--
+if not discord.opus.is_loaded(): # opus library for playing audio or something
     discord.opus.load_opus('libopus-0.dll')
 
-ytdl_format_options = {
+ytdl_format_options = { # configuration for downloading youtube audio and playing it
     'format': 'bestaudio/best',
     'outtmpl': '%(extractor)s-%(id)s-%(title)s.%(ext)s',
     'restrictfilenames': True,
@@ -33,16 +30,16 @@ ytdl_format_options = {
     'quiet': True,
     'no_warnings': True,
     'default_search': 'auto',
-    'source_address': '0.0.0.0' # bind to ipv4 since ipv6 addresses cause issues sometimes
+    'source_address': '0.0.0.0'
 }
 
-ffmpeg_options = {
+ffmpeg_options = { # more config
     'options': '-vn'
 }
 
 ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
 
-class YTDLSource(discord.PCMVolumeTransformer):
+class YTDLSource(discord.PCMVolumeTransformer): # I'm not gonna pretend I understand this bit
     def __init__(self, source, *, data, volume=0.5):
         super().__init__(source, volume)
 
@@ -63,6 +60,8 @@ class YTDLSource(discord.PCMVolumeTransformer):
         filename = data['url'] if stream else ytdl.prepare_filename(data)
         return cls(discord.FFmpegPCMAudio(filename, **ffmpeg_options), data=data)
 
+
+#--Mika's magical object oriented tomfuckery--
 from globals import *
 
 
