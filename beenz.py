@@ -318,7 +318,7 @@ class Bot(cmd.Bot):
 
         originalname = None
         
-
+        '''
         # -delete all roles-
         roles = []
 
@@ -399,4 +399,3 @@ class Bot(cmd.Bot):
                     break
                     voice_client.stop
 
-            '''
