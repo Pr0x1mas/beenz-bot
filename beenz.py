@@ -17,7 +17,13 @@ import asyncio
 
 # --Setup to play audio--
 if not discord.opus.is_loaded(): # opus library for playing audio or something
-    discord.opus.load_opus('libopus-0.dll')
+    try:
+        discord.opus.load_opus('.//lib//discord//bin//libopus-0.x86.dll')
+    except:
+        try:
+            discord.opus.load_opus('libopus-0.x86.dll')
+        except:
+            print("Could not find opus dll")
 
 ytdl_format_options = { # configuration for downloading youtube audio and playing it
     'format': 'bestaudio/best',
