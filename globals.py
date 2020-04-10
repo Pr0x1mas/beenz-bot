@@ -1,4 +1,4 @@
-#                     ===beenz-bot v2.4===
+#                     ===beenz-bot v2.5b===
 #                       ===globals.py===
 #  ======Copyright 2020 Pr0x1mas, TheProgramableTurtle======
 sysversion = "2.4"
