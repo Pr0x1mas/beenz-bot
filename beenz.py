@@ -1,4 +1,4 @@
-#                     ===beenz-bot v2.5b===
+#                     ===beenz-bot v2.4.2b===
 #                       ===beenz.py===
 #  ======Copyright 2020 Pr0x1mas, TheProgramableTurtle======
 
