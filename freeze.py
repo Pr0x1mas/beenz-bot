@@ -1,6 +1,6 @@
 #                     ===beenz-bot v2.4.2b===
 #                       ===freeze.py===
-#  ======Copyright 2020 Pr0x1mas, TheProgramableTurtle======
+#  ======Copyright 2020 TheProgramableTurtle======
 
 from cx_Freeze import setup, Executable
 from globals import *
