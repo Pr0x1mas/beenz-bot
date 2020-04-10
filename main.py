@@ -1,5 +1,5 @@
-#                    ===beenz-bot v2.4.2b===
-#                   ===metalgearrape.py===
+#                    ===beenz-bot v2.4.2===
+#                   ===main.py===
 #  ======Copyright 2020 Pr0x1mas, TheProgramableTurtle======
 
 print("Loading beenzbot...")
