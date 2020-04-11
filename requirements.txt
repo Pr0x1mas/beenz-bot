@@ -1,8 +1,0 @@
-discord
-aiohttp
-dnspython
-PyNaCl
-async-timeout
-beautifulsoup4
-python-dotenv
-youtube_dl
