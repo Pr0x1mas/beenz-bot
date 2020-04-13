@@ -15,14 +15,15 @@ import inspect
 import youtube_dl
 import asyncio
 import pathlib
+import ctypes.util
 
 progDir = pathlib.Path(__file__).parent.absolute()
 # --Setup to play audio--
 if not discord.opus.is_loaded(): # opus library for playing audio or something
     try:
-        discord.opus.load_opus("libopus-0.dll")
+        discord.opus.load_opus(ctypes.util.find_library("opus"))
     except:
-        print("Could not find opus dll in script directory. This probably means you are using a compiled version.")
+        print("Could not locate opus on your device. Attempting load from installer default directories")
         try:
             discord.opus.load_opus("./lib/discord/bin/libopus-0.x86.dll")
         except:
