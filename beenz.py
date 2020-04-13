@@ -20,14 +20,18 @@ progDir = pathlib.Path(__file__).parent.absolute()
 # --Setup to play audio--
 if not discord.opus.is_loaded(): # opus library for playing audio or something
     try:
-        discord.opus.load_opus("./lib/discord/bin/libopus-0.x86.dll")
+        discord.opus.load_opus("libopus-0.dll")
     except:
-        print("Could not find opus dll in ./lib/discord/bin directory. Consider running metalgearrape from the program folder.")
+        print("Could not find opus dll in script directory. This probably means you are using a compiled version.")
         try:
-            discord.opus.load_opus(f"{progDir}/../discord/bin/libopus-0.x86.dll")
-            print(f"Found opus dll in {progDir}/../discord/bin/libopus-0.x86.dll")
+            discord.opus.load_opus("./lib/discord/bin/libopus-0.x86.dll")
         except:
-            print("Could not find opus dll in working directory. Audio functionality will be disabled.")
+            print("Could not find opus dll in ./lib/discord/bin directory. Consider running metalgearrape from the program folder.")
+            try:
+                discord.opus.load_opus(f"{progDir}/../discord/bin/libopus-0.x86.dll")
+                print(f"Found opus dll in {progDir}/../discord/bin/libopus-0.x86.dll")
+            except:
+                print("Could not find opus dll in working directory. Audio functionality will be disabled.")
 
 ytdl_format_options = { # configuration for downloading youtube audio and playing it
     'format': 'bestaudio/best',
