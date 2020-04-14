@@ -4,3 +4,11 @@ nacl
 bs4
 dotenv
 youtube_dl
+os
+io
+ctypes.util
+pathlib
+asyncio
+inspect
+time
+random
