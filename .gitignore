@@ -1,5 +1,4 @@
 .idea
 .env
 *.pyc
-build
-dist
+__pycache__
