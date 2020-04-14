@@ -1,8 +1,6 @@
 discord
 aiohttp
-dns
 nacl
 bs4
 dotenv
 youtube_dl
-discord.ext
