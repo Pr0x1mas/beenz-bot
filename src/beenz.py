@@ -19,11 +19,11 @@ import ctypes.util
 
 progDir = pathlib.Path(__file__).parent.absolute()
 # --Setup to play audio--
-if not discord.opus.is_loaded(): # opus library for playing audio or something
+if not discord.opus.is_loaded(): # opus library for playing audio
     try:
         discord.opus.load_opus(ctypes.util.find_library("opus"))
     except:
-        print("Could not locate opus on your device. Attempting load from installer default directories")
+        print("Could not locate opus on your device. Attempting load from some possible directories")
         try:
             discord.opus.load_opus("./lib/discord/bin/libopus-0.x86.dll")
         except:
@@ -118,8 +118,8 @@ class Bot(cmd.Bot):
     @cmd.command()
     async def meme(ctx):
         async with ctx.channel.typing():
-            # --Fake meme feature--
-            memes = imagesearch.getImages("https://www.reddit.com/r/dankmemes/rising/")  # load dankmemes rising page
+            # --Send meme from r/dankmemes--
+            memes = imagesearch.getImages("https://www.reddit.com/r/dankmemes/rising/")  # load dankmemes rising page (rising gives more variation than hot)
 
             anymemes = False
 
@@ -149,7 +149,7 @@ class Bot(cmd.Bot):
     @cmd.command()
     async def beans(ctx):
         async with ctx.channel.typing():
-            # --Fake bean feature--
+            # --Send picture from r/beansinstrangeplaces--
             beans = imagesearch.getImages("https://www.reddit.com/r/BeansInStrangePlaces/")
 
             anybeans = False
@@ -179,7 +179,7 @@ class Bot(cmd.Bot):
     @cmd.command()
     async def geese(ctx):
         async with ctx.channel.typing():
-            # --Fake geese feature--
+            # --Send picture from r/geese--
             geese = imagesearch.getImages("https://www.reddit.com/r/Geese/")
 
             anygeese = False
