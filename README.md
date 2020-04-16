@@ -18,18 +18,7 @@ Sends a picture of a goose
 Sends a dank meme
 
 ### $beans
-
 Sends a cursed image of beans
 
-### $dm
-
-Attempts to DM all users banned from a server in the hope they'll join the raid. It's very unlikely it'll work.
-
-### $propaganda
-Spams the server with DRH propaganda
-
-### $colony
-Changes the server name to 'Colony of Heinz' and sets icon to our flag
-
-### $rape
-Removes all permissions for everyone and deletes all channels. Then it spams a new channel with hentai, waits 5 seconds, and bans eveyone it can.
+### $play
+Plays a song from youtube specified in the message. Example command: `$Pr0x1mas KSP Minmus SSTO`
