@@ -21,4 +21,4 @@ Sends a dank meme
 Sends a cursed image of beans
 
 ### $play
-Plays a song from youtube specified in the message. Example command: `$Pr0x1mas KSP Minmus SSTO`
+Plays a song from youtube specified in the message. Example command: `$play Pr0x1mas KSP Minmus SSTO`
