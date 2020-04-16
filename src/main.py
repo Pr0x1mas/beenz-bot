@@ -1,9 +1,8 @@
-#                    ===beenz-bot v2.4.2===
+#                    ===beenz-bot v2.6===
 #                   ===main.py===
 #  ======Copyright 2020 Pr0x1mas, TheProgramableTurtle======
 
 print("Loading beenzbot...")
-
 import beenz
 import os
 from globals import *
@@ -17,4 +16,3 @@ client = beenz.Bot(sysversion)
 client.registerCommands()
 
 client.run(TOKEN)
-
