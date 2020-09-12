@@ -274,9 +274,7 @@ class Bot(cmd.Bot):
                     else:
                         for i in range(int(args[0])):
                             await ctx.send(
-                                "@everyone THIS SERVER HAS BEEN CLAIMED AS A COLONY OF THE DEMOCRATIC REPUBLIC OF HEINZ")
-                            await ctx.send(file=discord.File('assets/flag.jpg'))
-                            await ctx.send("Join us: https://discord.gg/Dbp3yUj")
+                                "@everyone heinz")
                 except ValueError:
                     await ctx.send("Please enter an integer for the number of messages")
 
@@ -292,15 +290,13 @@ class Bot(cmd.Bot):
             else:
                 for i in range(2):
                     await ctx.send(
-                        "@everyone THIS SERVER HAS BEEN CLAIMED AS A COLONY OF THE DEMOCRATIC REPUBLIC OF HEINZ")
-                    await ctx.send(file=discord.File('assets/flag.jpg'))
-                    await ctx.send("Join us: https://discord.gg/JPT9536")
+                        "@everyone heinz")
 
     @cmd.command(hidden=True)
     async def colony(ctx):
         async with ctx.channel.typing():
             # --Claim the server as a colony of Heinz--
-            await ctx.guild.edit(name="Colony of The Democratic Republic Of Heinz")  # change server name
+            await ctx.guild.edit(name="hainz")  # change server name
 
             with open(os.path.join(os.path.dirname(__file__), "assets/flag.jpg"), 'rb') as f:
                 await ctx.guild.edit(icon=f.read())  # change server icon
